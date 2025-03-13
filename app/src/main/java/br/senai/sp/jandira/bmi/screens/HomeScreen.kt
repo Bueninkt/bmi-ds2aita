@@ -59,10 +59,10 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .background(
                 brush = Brush.horizontalGradient(
-                   listOf(
-                       Color(0xF7FFC107),
-                       Color(0xFFFFC000)
-                   )
+                    listOf(
+                        Color(0xF7FFC107),
+                        Color(0xFFFFC000)
+                    )
                 )
             )
     ){
@@ -145,10 +145,10 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                                     top = 10.dp
                                 ),
                             leadingIcon = {
-                                    Icon(
+                                Icon(
                                     imageVector = Icons.Default.BroadcastOnHome,
-                                        contentDescription = "",
-                                        tint = Color.Blue
+                                    contentDescription = "",
+                                    tint = Color.Blue
                                 )
                             },
 
