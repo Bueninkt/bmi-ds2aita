@@ -15,9 +15,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Balance
-import androidx.compose.material.icons.filled.Height
-import androidx.compose.material.icons.filled.Numbers
+
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Edit
+
+import androidx.compose.material.icons.filled.Info
+
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -179,7 +182,7 @@ fun userDateScreen(modifier: Modifier = Modifier){
                                 .fillMaxWidth(),
                             leadingIcon = {
                                 Icon(
-                                    imageVector = Icons.Default.Numbers,
+                                    imageVector = Icons.Default.Check,
                                     contentDescription = ""
                                 )
                             },
@@ -198,7 +201,7 @@ fun userDateScreen(modifier: Modifier = Modifier){
                                 .padding(vertical = 8.dp),
                             leadingIcon = {
                                 Icon(
-                                    imageVector = Icons.Default.Balance,
+                                    imageVector = Icons.Default.Edit,
                                     contentDescription = ""
                                 )
                             },
@@ -216,7 +219,7 @@ fun userDateScreen(modifier: Modifier = Modifier){
                                 .fillMaxWidth(),
                             leadingIcon = {
                                 Icon(
-                                    imageVector = Icons.Default.Height,
+                                    imageVector = Icons.Default.Info,
                                     contentDescription = "",
 
                                     )
@@ -254,6 +257,6 @@ fun userDateScreen(modifier: Modifier = Modifier){
 
 @Preview
 @Composable
-private fun HomeScreenPreview() {
+private fun userDateScreenPreview() {
     userDateScreen()
 }

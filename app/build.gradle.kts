@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.utils.IMPLEMENTATION
+
 
 plugins {
     alias(libs.plugins.android.application)
@@ -33,7 +33,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
+    kotlinOptions {3
         jvmTarget = "11"
     }
     buildFeatures {
@@ -58,5 +58,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+
 
 }
