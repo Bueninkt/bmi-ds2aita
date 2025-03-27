@@ -318,5 +318,5 @@ fun userDateScreen(modifier: Modifier = Modifier){
 @Preview
 @Composable
 private fun userDateScreenPreview() {
-    //userDateScreen()
+    userDateScreen()
 }
