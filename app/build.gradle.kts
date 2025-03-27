@@ -60,5 +60,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
 
+    implementation("androidx.compose.material:material-icons-extended-android:1.7.8")
+
+    implementation("androidx.navigation:navigation-compose:2.8.9")
+
 
 }

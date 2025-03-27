@@ -37,7 +37,7 @@ import br.senai.sp.jandira.bmi.R
 
 
 @Composable
-fun BMIresult(){
+fun BMIResultScreen(){
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -226,5 +226,5 @@ fun BMIresult(){
 @Preview(showSystemUi = true)
 @Composable
 private fun BMIResultPreview() {
-    BMIresult()
+    BMIResultScreen()
 }

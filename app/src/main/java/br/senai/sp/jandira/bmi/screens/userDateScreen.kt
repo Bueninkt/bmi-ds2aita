@@ -15,11 +15,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Balance
 
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Height
 
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Numbers
 
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -182,7 +185,7 @@ fun userDateScreen(modifier: Modifier = Modifier){
                                 .fillMaxWidth(),
                             leadingIcon = {
                                 Icon(
-                                    imageVector = Icons.Default.Check,
+                                    imageVector = Icons.Default.Numbers,
                                     contentDescription = ""
                                 )
                             },
@@ -201,7 +204,7 @@ fun userDateScreen(modifier: Modifier = Modifier){
                                 .padding(vertical = 8.dp),
                             leadingIcon = {
                                 Icon(
-                                    imageVector = Icons.Default.Edit,
+                                    imageVector = Icons.Default.Balance,
                                     contentDescription = ""
                                 )
                             },
@@ -219,7 +222,7 @@ fun userDateScreen(modifier: Modifier = Modifier){
                                 .fillMaxWidth(),
                             leadingIcon = {
                                 Icon(
-                                    imageVector = Icons.Default.Info,
+                                    imageVector = Icons.Default.Height,
                                     contentDescription = "",
 
                                     )
