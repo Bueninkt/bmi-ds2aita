@@ -1,6 +1,5 @@
 package br.senai.sp.jandira.bmi.screens
 
-
 import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -11,13 +10,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-
-
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Paid
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -27,13 +23,11 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -46,23 +40,25 @@ import androidx.navigation.NavHostController
 import br.senai.sp.jandira.bmi.R
 
 @Composable
-fun HomeScreen(navigation: NavHostController?) {
-
-    val nameState = remember {
+fun HomeScreen(navegacao: NavHostController) {
+    var nameSate = remember {
         mutableStateOf("")
     }
 
+    // Abrir ou Criar arquivo SharedPreference
+    val context  = LocalContext.current
+    val userFile = context
+        .getSharedPreferences("userFile", Context.MODE_PRIVATE)
+
+    // Colocar o arquivo em modo de ediçao
+
+    val editor = userFile.edit()
 
 
+    var isErrorState = remember {
+        mutableStateOf( false)
+    }
 
-    // abrir ou fechar um arquivo do Tipo SharedPreferences
-
-
-    val context = LocalContext.current
-    val userfile = context
-        .getSharedPreferences("user_file", Context.MODE_PRIVATE)
-
-    val editor = userfile.edit()
 
     Box(
         modifier = Modifier
@@ -70,127 +66,130 @@ fun HomeScreen(navigation: NavHostController?) {
             .background(
                 brush = Brush.horizontalGradient(
                     listOf(
-                        Color(0xF7FFC107),
-                        Color(0xFFFFC000)
+                        Color(0xFF39265E),
+                        Color(0xFF26173D)
                     )
                 )
             )
-    ){
-        Column (
+    ) {
+        Column(
             modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Transparent),
+                .fillMaxSize(),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
 
-
-        )
-
-        {
+        ) {
 
             Image(
                 painter = painterResource(
                     R.drawable.fitness
                 ),
-                contentDescription = "",
+                contentDescription = stringResource(
+                    R.string.logo
+                ),
                 modifier = Modifier
-                    .padding(
-                        top = 32.dp
-                    )
+                    .padding(top = 38.dp)
             )
             Text(
                 text = stringResource(
                     R.string.welcome
                 ),
-                fontSize = 30.sp,
                 color = Color.White,
-                fontWeight = FontWeight.SemiBold
-
-
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Bold
             )
-            Card(
 
+            Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(450.dp),
-                shape = RoundedCornerShape(
-                    topStart = 60.dp,
-                    topEnd = 60.dp
+                    .height(400.dp),
 
+                shape = RoundedCornerShape(
+                    topStart = 48.dp,
+                    topEnd = 48.dp
                 ),
-                colors = CardDefaults.cardColors(
-                    containerColor = Color.White
-                )
+                colors = CardDefaults
+                    .cardColors(
+                        containerColor = Color.White
+                    )
+
             ) {
-                Column (
+                Column(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(32.dp),
                     verticalArrangement = Arrangement.SpaceBetween,
                     horizontalAlignment = Alignment.End
-
-
-                ){
-                    Column (
+                ) {
+                    Column(
                         modifier = Modifier
-                            .fillMaxWidth()
 
-                    ){
+                            .fillMaxWidth()
+                    ) {
                         Text(
                             text = stringResource(
                                 R.string.your_name
+
                             ),
                             fontSize = 24.sp
-
-
                         )
                         TextField(
-                            value =  nameState.value,
+                            value = nameSate.value,
                             onValueChange = {
-                                nameState.value = it
+                                nameSate.value = it
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(
-                                    top = 10.dp
-                                ),
+                                .padding(top = 8.dp),
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text,
+                                capitalization = KeyboardCapitalization.Words),
                             leadingIcon = {
-                                Icon(
-                                    imageVector = Icons.Default.Search,
-                                    contentDescription = "",
-                                    tint = Color.Blue
-                                )
+                                Icon( imageVector = Icons.Default.Paid,
+                                    contentDescription = "")
                             },
+                            isError = isErrorState.value,
+                            supportingText = {
 
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Text,
-                                capitalization = KeyboardCapitalization.Sentences
+                                if (isErrorState.value){
+                                    Text(
+                                        text = stringResource(R.string.error_name)
+                                    )
+                                }
 
-                            )
+
+                            }
                         )
                     }
                     Button(
                         onClick = {
-                            editor.putString("user_name", nameState.value)
-                            editor.putInt("user_age", 50)
-                            editor.apply()
-                            navigation?.navigate("user_data")
-                    }) {
+                            if(nameSate.value.isEmpty()){
+                                isErrorState.value = true
+                            } else {
+                                editor.putString("user_name", nameSate.value)
+                                editor.apply()
+                                navegacao.navigate("dados")
+                            }
+
+                        },
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
                         Text(
                             text = stringResource(
                                 R.string.next
-                            )
+                            ),
+                            fontSize = 22.sp,
                         )
                     }
                 }
             }
+
+
         }
     }
 }
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 private fun HomeScreenPreview() {
-    HomeScreen(null)
-
+    //HomeScreen(navegacao)
 }

@@ -1,20 +1,29 @@
 <resources>
     <string name="app_name">BMI</string>
+    <string name="logo">Application Logo</string>
     <string name="welcome">Welcome!</string>
-    <string name="your_name">What\'s your name?</string>
+    <string name="your_name">What\'s your name</string>
     <string name="next">Next</string>
-    <string name="hi">Hi!</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
+    <string name="hi">Hi</string>
+    <string name="calculate">Calculate</string>
     <string name="age">Age</string>
     <string name="weight">Weight</string>
     <string name="height">Height</string>
-    <string name="calculate">Calculate</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
     <string name="result" translatable="false">Your BMI Result</string>
     <string name="bmi_value">23.39</string>
-    <string name="classBmi">You have Class I Obesity</string>
-    <string name="newCalculate">New Calc</string>
-    <string name="age_value">16</string>
-    <string name="weight_value">57 kg</string>
+    <string name="class_bmi">You have Class I Obesity</string>
+    <string name="new_calculate">New Calc</string>
+    <string name="age_value">17</string>
+    <string name="weight_value">70 kg</string>
     <string name="height_value">175 cm</string>
+    <string name="error_name">The user Name is required!</string>
+    <string name="obesity_1">You have Class I Obesity!</string>
+    <string name="obesity_2">You have Class II Obesity!</string>
+    <string name="obesity_3">You have Class III Obesity!</string>
+    <string name="normal">You have normal body weight!</string>
+    <string name="under_weight">You are below your ideal weight!</string>
+    <string name="over_weight">You are sligthy overweight!</string>
+
 </resources>
