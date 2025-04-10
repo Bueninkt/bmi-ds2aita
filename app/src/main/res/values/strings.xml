@@ -1,29 +1,36 @@
 <resources>
-    <string name="app_name">BMI</string>
-    <string name="logo">Application Logo</string>
     <string name="welcome">Welcome!</string>
-    <string name="your_name">What\'s your name</string>
+    <string name="your_name">What\'s your name?</string>
     <string name="next">Next</string>
-    <string name="hi">Hi</string>
-    <string name="calculate">Calculate</string>
+    <string name="hi">Hi!</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
     <string name="age">Age</string>
     <string name="weight">Weight</string>
     <string name="height">Height</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
-    <string name="result" translatable="false">Your BMI Result</string>
-    <string name="bmi_value">23.39</string>
-    <string name="class_bmi">You have Class I Obesity</string>
+    <string name="calculate">Calculate</string>
+    <string name="your_result">Your BMI Result</string>
     <string name="new_calculate">New Calc</string>
-    <string name="age_value">17</string>
-    <string name="weight_value">70 kg</string>
-    <string name="height_value">175 cm</string>
-    <string name="error_name">The user Name is required!</string>
-    <string name="obesity_1">You have Class I Obesity!</string>
-    <string name="obesity_2">You have Class II Obesity!</string>
-    <string name="obesity_3">You have Class III Obesity!</string>
-    <string name="normal">You have normal body weight!</string>
-    <string name="under_weight">You are below your ideal weight!</string>
-    <string name="over_weight">You are sligthy overweight!</string>
+    <string name="under_weight">You are below you ideal weight!</string>
+    <string name="normal_weight">You have normal body weigth!</string>
+    <string name="over_weigth">You are slightly overweigth!</string>
+    <string name="class1_weigth">You have Class I Obesity</string>
+    <string name="class2_weigth">You have Class II Obesity</string>
+    <string name="class3_weigth">You have Class III Obesity</string>
+
+
+
+    <string name="imc_value">30,6</string>
+    <string name="app_name">MyTrips</string>
+    <string name="login">Login</string>
+    <string name="please_sign">Please sign in to continue</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="account">Don\`t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email_icon">Email Icon</string>
+    <string name="lock_icon">Lock Icon</string>
+
 
 </resources>

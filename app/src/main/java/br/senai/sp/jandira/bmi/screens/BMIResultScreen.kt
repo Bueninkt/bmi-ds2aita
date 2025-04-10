@@ -1,4 +1,3 @@
-
 package br.senai.sp.jandira.bmi.screens
 
 import android.content.Context
@@ -13,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -30,126 +28,130 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import bmiCalculate
 import br.senai.sp.jandira.bmi.R
-import java.util.Locale
-
+import br.senai.sp.jandira.bmi.utils.numberConvertToLocale
 
 @Composable
-fun ResultBMI(navegacao: NavHostController){
+fun BMIResultScreen(navegacao: NavHostController?) {
 
-    val context = LocalContext.current
-    var userFile = context.getSharedPreferences("userFile", Context.MODE_PRIVATE)
+    val userFile = LocalContext.current.
+    getSharedPreferences("user_file", Context.MODE_PRIVATE)
 
-    val userWeight = userFile.getInt("user_weight", 0)
     val userHeight = userFile.getFloat("user_height", 0.0f)
+    val userWeight = userFile.getFloat("user_weight", 0.0f)
     val userAge = userFile.getInt("user_age", 0)
+
+    // Obter os daods do imc do usuário
+    val result = bmiCalculate(
+        userWeight.toInt(),
+        userHeight.toDouble().div(100)
+    )
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(
-                brush = Brush.linearGradient(
+                brush = Brush.horizontalGradient(
                     listOf(
-                        Color(0xFF39265E),
-                        Color(0xFF100234),
+                        Color(0xFF9D00FF),
+                        Color(0xFF583BFF),
                     )
                 )
-            ),
-        contentAlignment = Alignment.BottomCenter
-    )
-    {
-        Column {
-            Row(
+            )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            Text(
+                text = stringResource(R.string.your_result),
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(15.dp)
-                    .height(100.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = stringResource(R.string.result),
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 25.sp
-                )
-            }
+                    .padding(32.dp)
+                    .weight(1f)
+            )
             Card(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .width(width = 700.dp),
-                shape = RoundedCornerShape(
-                    topStart = 32.dp,
-                    topEnd = 32.dp
-                ),
-                colors = CardDefaults.cardColors(
-                    containerColor = Color.White
-                ),
-
-                ) {
+                    .fillMaxWidth()
+                    .weight(8f),
+                colors = CardDefaults
+                    .cardColors(
+                        containerColor = Color.White
+                    ),
+                shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp)
+            ) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(16.dp),
+                        .padding(32.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.SpaceAround
                 ) {
                     Card(
                         modifier = Modifier
-                            .size(100.dp),
-                        shape = CircleShape,
-                        border = BorderStroke(5.dp, Color(color = 0xFF2C1C67)),
+                            .size(130.dp),
                         colors = CardDefaults.cardColors(
                             containerColor = Color.White
+                        ),
+                        shape = CircleShape,
+                        border = BorderStroke(
+                            width = 7.dp,
+                            color = result.color
+
+
                         )
-                    )   {
-                        Column (
+                    ) {
+                        Column(
                             modifier = Modifier
                                 .fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center
-                        )   {
+                        ) {
                             Text(
-                                text = stringResource(R.string.bmi_value),
+                                text = numberConvertToLocale(result.bmi.second),
                                 color = Color.Black,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 35.sp
                             )
                         }
                     }
-                    Column(
+
+                    Text(
+                        text = result.bmi.first,
+                        fontSize = 20.sp,
+                        color = result.color,
+                       fontWeight = FontWeight.Bold,
                         modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ){
-                        Text(
-                            text = stringResource(R.string.class_bmi),
-                            color = Color.Black,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 20.sp
-                        )
-                    }
+                            .fillMaxWidth()
+                            .padding(15.dp)
+                            .align(Alignment.CenterHorizontally)
+
+
+                    )
                     Card(
                         modifier = Modifier
-                            .width(300.dp)
+                            .fillMaxWidth()
                             .height(80.dp)
                     ) {
                         Row(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(15.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ){
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                        ) {
                             Column(
                                 modifier = Modifier
-                                    .height(50.dp),
+                                    .height(50.dp)
+                                    .weight(1f),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 Text(
@@ -168,6 +170,7 @@ fun ResultBMI(navegacao: NavHostController){
                             VerticalDivider()
                             Column(
                                 modifier = Modifier
+                                    .weight(1f)
                                     .height(50.dp),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
@@ -187,6 +190,7 @@ fun ResultBMI(navegacao: NavHostController){
                             VerticalDivider()
                             Column(
                                 modifier = Modifier
+                                    .weight(1f)
                                     .height(50.dp),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
@@ -197,7 +201,7 @@ fun ResultBMI(navegacao: NavHostController){
                                     fontSize = 20.sp
                                 )
                                 Text(
-                                    text = String.format(Locale.getDefault(), "%.2f", userHeight ),
+                                    text = "$userHeight",
                                     color = Color.Black,
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 20.sp
@@ -205,31 +209,29 @@ fun ResultBMI(navegacao: NavHostController){
                             }
                         }
                     }
-                    Box(
+                    Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(300.dp)
-                            .background(Color.LightGray)
-                    ){
+                            .height(200.dp)
+                            .background(Color.Gray)
+                    ) {
 
                     }
                     HorizontalDivider()
                     Button(
                         onClick = {},
                         modifier = Modifier
-                            .padding(horizontal = 16.dp)
-                            .height(50.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(color = 0xFF2C1C67)
-                        )
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        colors = ButtonDefaults
+                            .buttonColors(
+                                containerColor = Color(0xff9c27b0)
+                            ),
+                        shape = RoundedCornerShape(12.dp)
                     ) {
                         Text(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            textAlign = TextAlign.Center,
                             text = stringResource(R.string.new_calculate),
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 29.sp
+                            fontSize = 20.sp
                         )
                     }
                 }
@@ -237,8 +239,10 @@ fun ResultBMI(navegacao: NavHostController){
         }
     }
 }
-@Preview(showSystemUi = true)
+
+
+@Preview
 @Composable
-private fun BMIResultPreview() {
-    //ResultBMI()
+private fun BMIResultScreenPreview() {
+    BMIResultScreen(null)
 }

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">IMC</string>
+    <string name="welcome">Bem-Vindo</string>
+    <string name="your_name">Qual é o seu nome?</string>
+    <string name="next">Próximo</string>
+    <string name="hi">Olá!</string>
+    <string name="male">Homem</string>
+    <string name="female">Mulher</string>
+    <string name="age">Idade</string>
+    <string name="weight">Peso</string>
+    <string name="height">Altura</string>
+    <string name="calculate">Calcular</string>
+    <string name="your_result">Resultado do Seu IMC</string>
+    <string name="new_calculate">Novo Calculo</string>
+    <string name="under_weight">Você está abaixo do seu peso ideal!</string>
+    <string name="normal_weight">Você tem um peso corporal normal!</string>
+    <string name="over_weigth">Você está levemente acima do peso!</string>
+    <string name="class1_weigth">Você tem Obesidade Grau I</string>
+    <string name="class2_weigth">Você tem Obesidade Grau II</string>
+    <string name="class3_weigth">Você tem Obesidade Grau III</string>
+
+</resources>

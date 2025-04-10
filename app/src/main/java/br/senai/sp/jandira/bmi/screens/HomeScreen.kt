@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Paid
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -40,156 +40,131 @@ import androidx.navigation.NavHostController
 import br.senai.sp.jandira.bmi.R
 
 @Composable
-fun HomeScreen(navegacao: NavHostController) {
-    var nameSate = remember {
+fun HomeScreen(navegacao: NavHostController?) {
+
+    var nameState = remember {
         mutableStateOf("")
     }
 
-    // Abrir ou Criar arquivo SharedPreference
-    val context  = LocalContext.current
-    val userFile = context
-        .getSharedPreferences("userFile", Context.MODE_PRIVATE)
-
-    // Colocar o arquivo em modo de ediçao
+    // Abrir ou fechar um arquivo do tipo SharedPreferences
+    var context = LocalContext.current
+    val userFile = context.getSharedPreferences("user_file", Context.MODE_PRIVATE)
 
     val editor = userFile.edit()
-
-
-    var isErrorState = remember {
-        mutableStateOf( false)
-    }
-
-
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(
                 brush = Brush.horizontalGradient(
                     listOf(
-                        Color(0xFF39265E),
-                        Color(0xFF26173D)
+                        Color(0xFF1914A2),
+                        Color(0xFFFFE600)
                     )
                 )
             )
-    ) {
-        Column(
+    ){
+        Column (
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .background(Color.Transparent),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
-
-        ) {
-
+        ){
             Image(
                 painter = painterResource(
                     R.drawable.fitness
                 ),
-                contentDescription = stringResource(
-                    R.string.logo
-                ),
+                contentDescription = "",
                 modifier = Modifier
-                    .padding(top = 38.dp)
+                    .padding(
+                        top = 32.dp
+                    )
             )
             Text(
                 text = stringResource(
-                    R.string.welcome
-                ),
-                color = Color.White,
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold
-            )
+                    R.string.welcome,
 
+                    ),
+                fontSize = 30.sp,
+                color = Color.White,
+                fontWeight = FontWeight.SemiBold
+            )
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(400.dp),
-
                 shape = RoundedCornerShape(
-                    topStart = 48.dp,
-                    topEnd = 48.dp
+                    topStart = 60.dp,
+                    topEnd = 60.dp
                 ),
-                colors = CardDefaults
-                    .cardColors(
-                        containerColor = Color.White
-                    )
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.White
+                )
 
             ) {
-                Column(
+                Column (
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(32.dp),
                     verticalArrangement = Arrangement.SpaceBetween,
                     horizontalAlignment = Alignment.End
-                ) {
-                    Column(
+                ){
+                    Column (
                         modifier = Modifier
-
                             .fillMaxWidth()
-                    ) {
+
+
+                    ){
                         Text(
                             text = stringResource(
                                 R.string.your_name
-
                             ),
                             fontSize = 24.sp
                         )
                         TextField(
-                            value = nameSate.value,
+                            value = nameState.value,
                             onValueChange = {
-                                nameSate.value = it
+                                nameState.value = it
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(top = 8.dp),
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text,
-                                capitalization = KeyboardCapitalization.Words),
+                                .padding(
+                                    top = 8.dp
+                                ),
                             leadingIcon = {
-                                Icon( imageVector = Icons.Default.Paid,
-                                    contentDescription = "")
+                                Icon(
+                                    imageVector = Icons.Default.Delete,
+                                    contentDescription = "",
+                                    tint = Color.Blue
+                                )
                             },
-                            isError = isErrorState.value,
-                            supportingText = {
-
-                                if (isErrorState.value){
-                                    Text(
-                                        text = stringResource(R.string.error_name)
-                                    )
-                                }
-
-
-                            }
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.Text,
+                                capitalization = KeyboardCapitalization.Words
+                            )
                         )
                     }
                     Button(
                         onClick = {
-                            if(nameSate.value.isEmpty()){
-                                isErrorState.value = true
-                            } else {
-                                editor.putString("user_name", nameSate.value)
-                                editor.apply()
-                                navegacao.navigate("dados")
-                            }
-
-                        },
-                        shape = RoundedCornerShape(8.dp)
-                    ) {
+                            editor.putString("user_name", nameState.value)
+                            editor.putInt("user_age", 50)
+                            editor.apply()
+                            navegacao?.navigate(route = "user_data")
+                        }) {
                         Text(
                             text = stringResource(
                                 R.string.next
-                            ),
-                            fontSize = 22.sp,
+                            )
                         )
                     }
                 }
             }
-
-
         }
     }
 }
 
-@Preview(showSystemUi = true)
+@Preview
 @Composable
 private fun HomeScreenPreview() {
-    //HomeScreen(navegacao)
+    HomeScreen(null)
 }
